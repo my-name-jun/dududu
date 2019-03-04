@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>commodity_details</title>
+<link href="/css/akg_commodity_details.css?27e0f5a094d54655dc93" rel="stylesheet"></head>
+
+<body :controller="vm" class="ms-controller">
+<div class="container">
+    <!-- GEN_HEADER -->
+    <div class="div_navigation">
+        <div class="div_navigation_classification fon">
+            分类 <a href="#" class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown"></a>
+            <ul class="dropdown-menu" aria-labelledby="drop2">
+                <li :for='(index,item) in @classification_list'
+                    :attr="value:item.key"><a href="#">{{@item.value}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--已经登陆的下拉框    （新加）-->
+        <div class="select_informations">
+            <div class="select_content" id="1">聊天信息</div>
+            <div class="select_content" id="2">我的订单</div>
+            <div class="select_content" id="3">购物车</div>
+            <div class="select_content" id="4">我的关注</div>
+            <div class="select_content" id="5">我的信息</div>
+            <div class="select_content" id="6">退出</div>
+        </div>
+
+        <div style="width: 66px;height: 28px;display: none;position: absolute;left: 1000px;top: 2px;z-index: 50"
+             class="hidden_div"></div>
+
+
+        <div class="div_navigation_home_page">
+            <div class="home"><a href="#">首页</a></div>
+            <div class="home1"><a href="#">商品列表</a></div>
+            <div class="home2"><a href="#" :click="@ldie">发布闲置</a></div>
+            <div class=" user"><a href="#" class="glyphicon glyphicon-user"></a><a href="#" data-toggle="modal"
+                                                                                   data-target="#myModal">{{@user}}</a>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="test">
+                                &times;
+                            </button>
+                            <h1 class="modal-title text-center" id="myModalLabel">
+                                登录
+                            </h1>
+                        </div>
+
+
+                        <!--重构登陆-->
+                        <div class="login_main">
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-user"></i></div>
+                                <div class="input_texts"><input class="" type="text" placeholder="请输入账号" id="username"
+                                                                name="username" autofocus="autofocus"
+                                                                autocomplete="off"/></div>
+                            </div>
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-lock"></i></div>
+                                <div class="input_texts">
+                                    <input class="input_texts" type="password" placeholder="请输入密码" id="password"
+                                           name="password" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="login_footer">
+                                <button type="button" class="btn login_submit" id="land">登录</button>
+                                <div class="updata_password">
+                                    <i class="glyphicon glyphicon-question-sign"></i>
+                                    <span>修改密码</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
+    <!--logo内容和全部中间部分-->
+    <div class="div_content">
+        <!--logo-->
+        <div class="div_logo">
+            <img :attr="{src:@img_logo}" class="img_logo">
+            <div class="input-group search_text">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                <input type="text" class="form-control text-center" placeholder="此处输入搜索商品" id="form_control">
+            </div>
+            <div class="search bs-example">
+                <button type="button" class="btn btn-primary " :click="@serach_click">搜索</button>
+            </div>
+
+        </div>
+        <div class="commodity_details">
+            <div class="commodity_details_picture">
+                <img :attr="{src:}" id="icon_main" class="img_logo1">
+            </div>
+            <div class="commodity_details_picture_small1" ms-mouseover="@icon_over(1)">
+                <img :attr="{src:}" id="img_logo1" class="img_logo1">
+            </div>
+            <div class="commodity_details_picture_small2" ms-mouseover="@icon_over(2)">
+                <img :attr="{src:}" id="img_logo2" class="img_logo1">
+            </div>
+            <div class="commodity_details_picture_small3" ms-mouseover="@icon_over(3)">
+                <img :attr="{src:}" id="img_logo3" class="img_logo1">
+            </div>
+            <div class="commodity_details_picture_small4" ms-mouseover="@icon_over(4)">
+                <img :attr="{src:}" id="img_logo4" class="img_logo1">
+            </div>
+            <div class="commodity_details_picture_small5" ms-mouseover="@icon_over(5)">
+                <img :attr="{src:}" id="img_logo5" class="img_logo1">
+            </div>
+
+
+            <div class="commodity_details_word">
+                <div class="commodity_details_word_title">
+                    <b>{{datacom.data.product[0].name}}</b>
+                </div>
+                <div class="commodity_details_word_btn1">
+                    <button type="button" class="btn btn-danger"> 全新闲置</button>
+                    <span style="display: none">{{commodity}}</span>
+                </div>
+                <div class="commodity_details_word_btn2">
+                    <button type="button" class="btn btn-primary">仅有一件</button>
+                </div>
+                <div class="commodity_details_word_collection"><a href="#" id="collect"
+                                                                  class="glyphicon glyphicon-heart" style="color: gray"
+                                                                  :click="@collect_interval"></a></div>
+                <div class="commodity_details_word_original_price"><s>{{original_price}}</s></div>
+                <div class="commodity_details_word_price">现售价：￥{{datacom.data.product[0].price}}</div>
+                <div class="commodity_details_word_number"><span>数量：</span>
+                    <input type="text" class="input_text" placeholder="1" readonly>库存{{datacom.data.product[0].storage}}件
+                </div>
+                <div class="commodity_details_word_transaction_mode">交易方式：<a href="#">自提</a>、<a href="#">当面交易</a>、
+                    <a href="#">微信交易</a></div>
+                <button type="button" class="commodity_details_word_btn_join" id="insertShoppingCart_btn">加入购物车</button>
+                <button type="button" class=" btn btn-primary btn-lg commodity_details_word_btn_purchase"
+                        :click="Purchase_immediately(datacom.data.product[0].id,datacom.data.product[0].storage)" id="goumai">立即购买
+                </button>
+                <button type="button" class="commodity_details_word_btn_information" data-toggle="modal"
+                        data-target="#myModal_sell">卖家信息
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="commodity_details_chart">
+        <div class="commodity_details_chart_title">
+            <div class="commodity_details_chart_title_title text-center" id="commodity_detail"><a>商品详情</a></div>
+            <div class="commodity_details_chart_title_title1 text-center" id="order_comment"><a>用户评价卖家记录</a></div>
+        </div>
+        <div id="goods_describe" class="commodity_details_chart_chart">
+
+        </div>
+        <div class="commodity_details_chart_chart1">
+            <div style="width: 100%;height: 2000px;">
+                <div style="width: 100%;height: auto;">
+                    <!--评价-->
+                    <div class="comment" :for="(index,item) in @comments">
+                        <div class="comment_outside">
+                            <div class="comment_img">
+                                <img :attr="{src:@urlhttp + @item.userInfo[0].avatar}" class="img_logo2">
+                            </div>
+                            <span style="display: block" class="text-center">{{item.userInfo[0].name}}</span>
+                        </div>
+                        <div class="comment_title">
+                            {{item.content}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<div class="comment_paging">-->
+            <!--<label>-->
+            <!--<a href="#">«</a>-->
+            <!--</label>-->
+            <!--123123-->
+            <!--<label>-->
+            <!--<a href="#">»</a>-->
+            <!--</label>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+
+    <!--<div class="simmilar">-->
+    <!--<p class="simmilar_title">其他相似商品</p>-->
+    <!--<div class="simmilar_recommend">-->
+    <!--<div class="simmilar_commodity1">-->
+    <!--<div class="simmilar_relative">-->
+    <!--<div class="simmilar_img"><img :attr="{src:@img_logo1}" class="img_logo1"></div>-->
+    <!--<p class="commodity_description">{{commodity_description}}</p>-->
+    <!--<p class="commodity_description_price">￥{{simmilar_commodity1}}</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="simmilar_commodity2">-->
+    <!--<div class="simmilar_relative">-->
+    <!--<div class="simmilar_img"><img :attr="{src:@img_logo1}" class="img_logo1"></div>-->
+    <!--<p class="commodity_description">{{commodity_description}}</p>-->
+    <!--<p class="commodity_description_price">￥{{simmilar_commodity2}}</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="simmilar_commodity3">-->
+    <!--<div class="simmilar_relative">-->
+    <!--<div class="simmilar_img"><img :attr="{src:@img_logo1}" class="img_logo1"></div>-->
+    <!--<p class="commodity_description">{{commodity_description}}</p>-->
+    <!--<p class="commodity_description_price">￥{{simmilar_commodity3}}</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="simmilar_commodity4">-->
+    <!--<div class="simmilar_relative">-->
+    <!--<div class="simmilar_img"><img :attr="{src:@img_logo1}" class="img_logo1"></div>-->
+    <!--<p class="commodity_description">{{commodity_description}}</p>-->
+    <!--<p class="commodity_description_price">￥{{simmilar_commodity4}}</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="simmilar_commodity5">-->
+    <!--<div class="simmilar_relative">-->
+    <!--<div class="simmilar_img"><img :attr="{src:@img_logo1}" class="img_logo1"></div>-->
+    <!--<p class="commodity_description">{{commodity_description}}</p>-->
+    <!--<p class="commodity_description_price">￥{{simmilar_commodity5}}</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--尾-->
+    <div class="tail">
+        <div class="div_logo_img">
+            <img :attr="{src:@img_logo}" class="img_logo">
+        </div>
+        <div class="tail_title_font_size">
+            <p><b>便民嘟嘟站，全心全意为大学生服务</b></p>
+            <p>©️2018-2018 华南理工大学广州学院计算机工程学院2016级软件一班便民嘟嘟站 版权所有</p>
+        </div>
+    </div>
+
+
+    <!-- 模态框（Modal）购买！ -->
+    <div class="modal fade madal_margin" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header div_modal_center">温馨提示
+                    <div class="modal-footer">
+                        <p class="div_modal_center_p">您已申请购买！</p>
+                        <p class="div_modal_center_p">卖家正在甄选心仪买家~请耐心等候噢</p>
+                        <p class="div_modal_center_p"> 如需查看订单进度，请<a href="#">点击这里</a></p>
+                    </div>
+                    <button type="button" class="div_modal_center_btn " data-dismiss="modal" aria-hidden="true">
+                        好的，我已清楚
+                    </button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    <!-- 模态框（Modal）卖家信息！ -->
+    <div id="modal_sell">
+        <div class="modal fade madal_margin" id="myModal_sell" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal_style">
+                        <div style="width: 95%;margin: auto;">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="div_modal_center" style="margin-top: 2%;color: #000;">
+                            <b>卖家信息</b>
+                        </div>
+                        <div class="sell_information">
+                            <div class="sell_head">
+                                <div style=" width: 100%;height: 80%;border-right: 1px solid #E0E0E0">
+                                    <div class="sell_head_img">
+                                        <img :attr="{src:@urlhttp + @datacom.data.product[0].user[0].avatar}"
+                                             class="img_logo3">
+                                    </div>
+                                    <div class="sell_fans">
+                                        <div class="size">
+                                            <span style="padding-left: 25%;padding-right: 10%;">粉丝</span>{{num}}
+                                        </div>
+                                        <div class="size">
+                                            <span style="padding-right: 8%;">商品被喜欢</span>{{num}}
+                                        </div>
+                                        <div>
+                                            <span style="padding-left: 18%;padding-right: 10%;font-size: 18px;">信誉值</span>{{num}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sell_information_basic">
+                                <div class="basic">
+                                    <span>昵称：</span>{{datacom.data.product[0].user[0].name}}
+                                </div>
+                                <div class="basic1">
+                                    <span :if="datacom.data.product[0].user[0].sex==1">性别：<label>女</label><b
+                                            style="color: red;">♀</b></span>
+                                    <span :if="datacom.data.product[0].user[0].sex==0">性别：<label>男</label><b
+                                            style="color: red;">♂</b></span>
+                                </div>
+                                <div class="basic1">
+                                    <span>学院：</span>{{datacom.data.product[0].user[0].faculty}}
+                                </div>
+                                <div class="basic1">
+                                    <span>专业：</span>{{datacom.data.product[0].user[0].profession}}
+                                </div>
+                                <div class="basic1">
+                                    <span>电话号码：</span>{{datacom.data.product[0].user[0].mobile}}
+                                </div>
+                                <div class="basic2">
+                                    <span>个性签名：</span>{{datacom.data.product[0].user[0].signature}}
+                                </div>
+                                <div style="margin-left: 30%">
+                                    <button type="button" class="div_modal_center_btn1 " data-dismiss="modal"
+                                            aria-hidden="true" id="contact" :click="contact">
+                                        联系卖家
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+    </div>
+
+
+</div>
+<script src="/js/common.js.js?27e0f5a094d54655dc93"></script><script src="/js/akg_commodity_details.js?27e0f5a094d54655dc93"></script></body>
+
+</html>

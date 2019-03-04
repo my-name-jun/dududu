@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Essential_information</title>
+<link href="/css/Essential_information.css?27e0f5a094d54655dc93" rel="stylesheet"></head>
+
+<body :controller="vm" class="ms-controller">
+<div class="container">
+    <div class="div_navigation">
+        <div class="div_navigation_classification fon">
+            分类 <a href="#" class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown"></a>
+            <ul class="dropdown-menu" aria-labelledby="drop2">
+                <li :for='(index,item) in @classification_list'
+                    :attr="value:item.key" ><a href="#">{{@item.value}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--已经登陆的下拉框    （新加）-->
+        <div class="select_informations">
+            <div class="select_content" id="1">聊天信息</div>
+            <div class="select_content" id="2">我的订单</div>
+            <div class="select_content" id="3">购物车</div>
+            <div class="select_content" id="4">我的关注</div>
+            <div class="select_content" id="5">我的信息</div>
+            <div class="select_content" id="6">退出</div>
+        </div>
+
+        <div style="width: 66px;height: 28px;display: none;position: absolute;left: 1230px;top: 2px;z-index: 50" class="hidden_div"></div>
+
+
+        <div class="div_navigation_home_page">
+            <div class="home"><a href="#">首页</a></div>
+            <div class="home1"><a href="#" >商品列表</a></div>
+            <div class="home2"><a href="#" :click="@ldie">发布闲置</a></div>
+            <div class=" user"><a href="#" class="glyphicon glyphicon-user"></a><a href="#" data-toggle="modal"
+                                                                                   data-target="#myModal">{{@user}}</a></div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="test">
+                                &times;
+                            </button>
+                            <h1 class="modal-title text-center" id="myModalLabel">
+                                登录
+                            </h1>
+                        </div>
+
+
+                        <!--重构登陆-->
+                        <div class="login_main">
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-user"></i></div>
+                                <div class="input_texts"><input class="" type="text" placeholder="请输入账号" id="username"
+                                                                name="username" autofocus="autofocus" autocomplete="off"/></div>
+                            </div>
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-lock"></i></div>
+                                <div class="input_texts">
+                                    <input class="input_texts" type="password" placeholder="请输入密码" id="password"
+                                           name="password" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="login_footer">
+                                <button type="button" class="btn login_submit" id="land">登录</button>
+                                <div class="updata_password">
+                                    <i class="glyphicon glyphicon-question-sign"></i>
+                                    <span>修改密码</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
+    <!--个人页面-->
+    <div class="my_order">
+        <div class="triangle" id="triangle"></div>
+        <div class="self"><b>个人页面</b></div>
+        <div class="my_information"><a href="#" id="inf">基本信息</a></div>
+        <div class="my_orders"><a href="#" id="order">我的订单</a></div>
+        <div class="my_follow"><a href="#" id="follow">我的关注</a></div>
+        <div class="search_commodity">
+            <div class="relative_position">
+
+                <input type="text" class="search_commodity_text" placeholder="此处输入搜索商品" id="form_control">
+                <button type="button" class="search_commodity_btn" :click="serach_click">搜索</button>
+                <span class="img_search">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--modal-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <!--test-->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel1">上传图片</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="cropper_div">
+                        <img class="cropper_img" id="modal_img">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary footer_font" id="cropper_btn">保存修改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    <!--/////////////////////////////////////////////////////////////-->
+
+    <div class="modal_content">
+        <div style="width: 101%;height: 101%;  border: 1px solid #cecece;position: relative;top: -1%;">
+            <div style="width: 95%;margin-top: 1%; ">
+                <span class="arrow_left" :if="@edit5">
+                    <a href="#" class="glyphicon glyphicon-arrow-left" :click="@arrow_left"></a>
+                </span>
+                <span class="edit">
+                    <div><a class="glyphicon glyphicon-edit" :click="edit_inf" :if="@edit"><label
+                            style="display: inline-block ;vertical-align: middle;">编辑信息</label></a></div>
+                    <div><a class="glyphicon glyphicon-edit" :click="edit_inf_succ" :if="@edit1"><label
+                            style="display: inline-block ;vertical-align: middle;">编辑成功</label></a></div>
+                    <a class="glyphicon glyphicon-edit" :click="edit_inf_pwd" :if="@edit"><label
+                            style="display: inline-block ;vertical-align: middle;">修改密码</label></a>
+                    <a class="glyphicon glyphicon-edit" :click="edit_inf_pwd1" :if="@edit2"><label
+                            style="display: inline-block ;vertical-align: middle;">确定修改</label></a>
+                </span>
+            </div>
+            <div class="sell_information">
+                <div class="sell_head">
+                    <div style=" width: 100%;height: 85%;border-right: 1px solid #E0E0E0">
+                        <div class="sell_head_img">
+                            <img :if="@edit4" :attr="{src:@urlhttp + @Essential_information.userInfo.avatar}"
+                                 class="img_logo1">
+                            <label id="avatar_label" :if="@edit1">
+                                <input type="file" name="cover" class="img_logo2"  id="avatar_input"
+                                       style="left:-9999px;position:absolute;">
+                                <img :attr="{src:@urlhttp + @Essential_information.userInfo.avatar}" class="img_logo1" id="edit_avatar">
+                            </label>
+                        </div>
+                        <div class="sell_fans">
+                            <div class="size">
+                                <span style="padding-left: 25%;padding-right: 10%;display: inline-block;height: 30px;">粉丝</span>{{Essential_information.fancount}}
+                            </div>
+                            <div class="size">
+                                <span style="padding-right: 8%;display: inline-block;height: 30px;">商品被喜欢</span>{{num}}
+                            </div>
+                            <div>
+                                <span style="padding-left: 18%;padding-right: 10%;font-size: 18px;display: inline-block;height: 30px;">信誉值</span>{{num}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--基本信息-->
+                <div class="sell_information_basic1" :if="!@edit3">
+                    <div class="basicpwd">
+                        <span style="margin-right: 3%" >旧密码：</span>
+                        <label >
+                            <input type="password" placeholder="请输入旧密码" class="text-center" id="Essential_information_old_pwd">
+                        </label>
+                    </div>
+                    <div class="basicpwd">
+                        <span style="margin-right: 3%" >新密码：</span>
+                        <label >
+                            <input type="password" placeholder="请输入新密码" class="text-center" id="Essential_information_new_pwd">
+                        </label>
+                    </div>
+                    <div class="basicpwd">
+                        <span style="margin-right: 3%" >重新输入密码：</span>
+                        <label >
+                            <input type="password" placeholder="重新输入密码" class="text-center" id="Essential_information_new_pwd1">
+                        </label>
+                    </div>
+                </div>
+
+
+
+                <div class="sell_information_basic" :if="@edit3">
+                    <div class="basic">
+                        <span style="margin-right: 3%" >昵称：</span>
+                        <label :if="@edit">{{Essential_information.userInfo.name}}</label>
+                        <label :if="@edit1">
+                            <input type="text" placeholder="昵称xxx" class="text-center" id="Essential_information_name">
+                        </label>
+                    </div>
+                    <div class="basic1">
+                        <span style="margin-right: 3%">性别：</span>
+                        <span  :if="@edit" style="width: 20%;height: 100%">
+                        <label  :if="Essential_information.userInfo.sex==1">女<b style="color: red;">♀</b></label>
+                        <label :if="Essential_information.userInfo.sex==0">男<b style="color: blue;">♂</b></label>
+                        </span>
+                        <div style="display: inline;margin-right: 54%;width: 171px;" :if="@edit1">
+                            <input name="man" type="radio" value="0" checked class="sex"/>男
+                            <input name="man" type="radio" value="1" class="sex"/>女
+                        </div>
+                        <div style="display: inline;" :if="@edit1">
+                            <input name="display" type="radio" value=""/>隐藏
+                            <input name="display" type="radio" value="" style="margin-left:2%" checked/>显示
+                        </div>
+                    </div>
+                    <div class="basic1">
+                        <span style="margin-right: 3%">学院：</span>
+                        <label :if="@edit">{{Essential_information.userInfo.faculty}}</label>
+                        <div style="display: inline;margin-right: 40%;width: 171px;" :if="@edit1">
+                            <select id="Essential_information_faculty">
+                                <option :for="(index,item) in @college">{{item.value}}</option>
+                            </select>
+                        </div>
+                        <div style="display: inline;" :if="@edit1">
+                            <input name="display1" type="radio" value=""/>隐藏
+                            <input name="display1" type="radio" value="" style="margin-left:2%" checked/>显示
+                        </div>
+                    </div>
+                    <div class="basic1">
+                        <span style="margin-right: 3%">专业：</span>
+                        <label :if="@edit">{{Essential_information.userInfo.profession}}</label>
+                        <div style="display: inline;margin-right: 40%;width: 171px;" :if="@edit1">
+                            <select id="Essential_information_profession">
+                                <option :for="(index,item) in @major">{{item.value}}</option>
+                            </select>
+                        </div>
+                        <div style="display: inline;" :if="@edit1">
+                            <input name="display2" type="radio" value=""/>隐藏
+                            <input name="display2" type="radio" value="" style="margin-left:2%" checked/>显示
+                        </div>
+                    </div>
+                    <div class="basic1">
+                        <span style="margin-right: 3%">生日：</span>
+                        <label :if="@edit">{{Essential_information.userInfo.birthday}}</label>
+                        <div style="display: inline;margin-right: 36.7%;width: 171px;" :if="@edit1">
+                            <input type="text" placeholder="请选择日期" class="text-center " :duplex="birthday"
+                                   :click="birthday1" id="birthday">
+                        </div>
+                        <div style="display: inline;" :if="@edit1">
+                            <input name="display3" type="radio" value=""/>隐藏
+                            <input name="display3" type="radio" value="" style="margin-left:2%" checked/>显示
+                        </div>
+                    </div>
+                    <div class="basic1">
+                        <span style="margin-right: 3%">手机号码：</span>
+                        <label :if="@edit">{{Essential_information.userInfo.mobile}}</label>
+                        <div style="display: inline;margin-right: 31.3%;width: 171px;" :if="@edit1">
+                            <input type="text" placeholder="请输入手机号码" class="text-center "
+                                   id="phone">
+                        </div>
+                        <div style="display: inline;" :if="@edit1">
+                            <input name="display5" type="radio" value=""/>隐藏
+                            <input name="display5" type="radio" value="" style="margin-left:2%" checked/>显示
+                        </div>
+                    </div>
+                    <div class="basic2">
+                        <span style="display: inline-block;vertical-align: top;margin-right: 1%">个性签名：</span>
+                        <span :if="@edit"><b>{{Essential_information.userInfo.signature}}</b></span>
+                        <div style="display: inline;" :if="@edit1" class="text-left">
+                            <textarea rows="3" cols="42" placeholder="请输入您的个性签名" class="textarea"
+                                      id="Essential_information_signature">
+
+                            </textarea>
+                        </div>
+                        <div style="display: block; margin-left: 12%" :if="@edit1">
+                            <input name="display4" type="radio" value=""/>隐藏
+                            <input name="display4" type="radio" value="" style="margin-left:2%" checked/>显示
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- /.modal-content -->
+
+
+    <!--尾-->
+    <div class="tail">
+        <div class="div_logo_img">
+            <img :attr="{src:@img_logo}" class="img_logo">
+        </div>
+        <div class="tail_title_font_size">
+            <p><b>便民嘟嘟站，全心全意为大学生服务</b></p>
+            <p>©️2018-2018 华南理工大学广州学院计算机工程学院2016级软件一班便民嘟嘟站 版权所有</p>
+        </div>
+    </div>
+</div>
+<script src="/js/common.js.js?27e0f5a094d54655dc93"></script><script src="/js/Essential_information.js?27e0f5a094d54655dc93"></script></body>
+
+</html>

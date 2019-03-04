@@ -1,0 +1,78 @@
+{
+  "apps": [
+    {
+      "name": "akg",
+      "pages": [
+        {
+          "page": "login",
+          "component": [
+            {
+              "name": "input",
+              "id": "name"
+            },
+            {
+              "name": "input",
+              "id": "mobile"
+            },
+            {
+              "name": "radio",
+              "id": "gender"
+            },
+            {
+              "name": "select",
+              "id": "career"
+            },
+            {
+              "name": "dateTimePicker",
+              "id": "birthday"
+            },
+            {
+              "name": "radio",
+              "id": "icIsLongValid"
+            },
+            {
+              "name": "dateTimePicker",
+              "id": "icExpiryDay"
+            },
+            {
+              "name": "contact_address",
+              "id": "contact_address_userInfo"
+            }
+          ]
+        },
+        {
+          "page": "detail",
+          "component": []
+        },
+        {
+          "page": "premium",
+          "component": []
+        },
+        {
+          "page": "info",
+          "component": []
+        },
+        {
+          "page": "health",
+          "component": []
+        },
+        {
+          "page": "confirm",
+          "component": []
+        },
+        {
+          "page": "myOrder",
+          "component": []
+        },
+        {
+          "page": "preview",
+          "component": []
+        },
+        {
+          "page": "upload",
+          "component": []
+        }
+      ]
+    }
+  ]
+}

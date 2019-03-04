@@ -1,0 +1,10 @@
+var category = [
+    {id: "1", name: '学习'},
+    {id: "2", name: '电子产品'},
+    {id: "3", name: '技能'},
+    {id: "4", name: '生活用品'},
+    {id: "5", name: '服装'},
+    {id: "6", name: '其他'},
+];
+
+module.exports = category;

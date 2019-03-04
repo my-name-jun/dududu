@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>shopping_trolly</title>
+</head>
+
+<body :controller="vm" class="container_all">
+<!--导航条-->
+<div class="div_navigation">
+    <div class="div_navigation_classification fon">
+        分类 <a href="#" class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown"></a>
+        <ul class="dropdown-menu" aria-labelledby="drop2">
+            <li :for='(index,item) in @classification_list'
+                :attr="value:item.key" ><a href="#">{{@item.value}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <!--已经登陆的下拉框    （新加）-->
+    <div class="select_informations">
+        <div class="select_content" id="1">聊天信息</div>
+        <div class="select_content" id="2">我的订单</div>
+        <div class="select_content" id="3">购物车</div>
+        <div class="select_content" id="4">我的关注</div>
+        <div class="select_content" id="5">我的信息</div>
+        <div class="select_content" id="6">退出</div>
+    </div>
+
+    <div style="width: 66px;height: 28px;display: none;position: absolute;left: 1000px;top: 2px;z-index: 50" class="hidden_div"></div>
+
+
+    <div class="div_navigation_home_page">
+        <div class="home"><a href="#">首页</a></div>
+        <div class="home1"><a href="#" >商品列表</a></div>
+        <div class="home2"><a href="#" :click="@ldie">发布闲置</a></div>
+        <div class=" user"><a href="#" class="glyphicon glyphicon-user"></a><a href="#" data-toggle="modal"
+                                                                               data-target="#myModal">{{@user}}</a></div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="test">
+                            &times;
+                        </button>
+                        <h1 class="modal-title text-center" id="myModalLabel">
+                            登录
+                        </h1>
+                    </div>
+
+
+                    <!--重构登陆-->
+                    <div class="login_main">
+                        <div class="login_input">
+                            <div class="input_icon"><i class="glyphicon glyphicon-user"></i></div>
+                            <div class="input_texts"><input class="" type="text" placeholder="请输入账号" id="username"
+                                                            name="username" autofocus="autofocus" autocomplete="off"/></div>
+                        </div>
+                        <div class="login_input">
+                            <div class="input_icon"><i class="glyphicon glyphicon-lock"></i></div>
+                            <div class="input_texts">
+                                <input class="input_texts" type="password" placeholder="请输入密码" id="password"
+                                       name="password" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="login_footer">
+                            <button type="button" class="btn login_submit" id="land">登录</button>
+                            <div class="updata_password">
+                                <i class="glyphicon glyphicon-question-sign"></i>
+                                <span>修改密码</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+    </div>
+</div>
+
+        <!-- 内容 -->
+        <div class="div_content">
+            <!--logo及搜索-->
+            <div class="div_logo">
+                <img :attr="{src:@img_logo}" class="img_logo">
+                <div class="input-group search_text">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                    <input type="text" class="form-control" placeholder="此处输入搜索商品">
+                </div>
+                <div class="search bs-example">
+                    <button type="button" class="btn btn-primary " :click="serach_click">搜索</button>
+                </div>
+            </div>
+
+            <!--购物车订单-->
+            <div class="shopping_order">
+                <div class="shopping_header">
+                    <input type="checkbox" name="check_header" class="box" onclick="" :click="@checkbox_all">
+                    <span class="words" style="margin-left: 14%">宝贝</span>
+                    <span class="words" style="margin-left: 5.7%">单价</span>
+                    <span class="words">数量</span>
+                    <span class="words">金额</span>
+                    <span class="words">操作</span>
+                </div>
+                <div class="shopping_content">
+                    <div class="order_div" :for='(index,item) in @all_shopping_commodity'>
+                        <div class="order_header">
+                            <img :attr="{src:@srcurl + @item.avatar}" alt="" class="portrait">
+                            <span class="order_header_span">{{@item.saleUserName}}</span>
+                            <span class="glyphicon glyphicon-trash delete" onclick="" :click="@delete_shopping(item.shoppingCartId,index)"></span>
+
+                        </div>
+                        <div class="order_content">
+                            <input type="checkbox" name="check" onclick="" :click="@checkbox(index,@item.price)" style="width: 5%;height: 19%;margin-top: 1.2%;vertical-align: top">
+                            <img :attr="{src:@srcurl + @item.icon}" alt="" class="commodity_picture">
+                            <span class="commodity_all" style="margin-left: 1%">{{@item.name}}</span>
+                            <span class="commodity_all" style="margin-left: 6.5%">￥{{@item.price}}</span>
+                            <span class="num_span">
+                            <input type="button" class="btn num_btn" value="-" style="float: left">
+                                <input disabled="disabled" type="text" class="num_text" :duplex="@num_text"><input style="float: right" type="button" class="btn num_btn" value="+">
+                        </span>
+                            <span class="commodity_all" style="margin-left: 8.5%;color: rgba(229,28,35,1)">￥{{@item.price}}</span>
+                            <span class="love">喜欢<span class="glyphicon glyphicon-heart icon_love" onclick="" :click="@love(index,@item.id)"></span></span>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+                <div class="shopping_footer">
+                    <input type="checkbox" onclick="" :click="@checkbox_all" name="check_all" style="width: 4%;height: 40%;margin-top: 1.2%;vertical-align: top">
+                    <span class="footer_words">全选</span>
+                    <span class="footer_words" style="cursor: pointer;padding-right: 0" id="delete">删除</span>
+                    <!--<span class="footer_words">标记喜欢</span>-->
+                    <span class="footer_words" style="margin-left: 38%">已选商品<span>{{@order_num}}</span>件</span>
+                    <span class="settlement_amount">{{@commodity_price_all}}</span>
+                    <button type="button" class="btn settlement_btn" id="submit">结算</button>
+                </div>
+
+            </div>
+
+            <!--页尾-->
+            <div class="tail">
+                <div class="div_logo_img">
+                    <img :attr="{src:@img_logo}" class="img_logo">
+                </div>
+                <div class="tail_title_font_size">
+                    <p><b>便民嘟嘟站，全心全意为大学生服务</b></p>
+                    <p>©️2018-2018 华南理工大学广州学院计算机工程学院2016级软件一班便民嘟嘟站 版权所有</p>
+                </div>
+            </div>
+        </div>
+        <!-- GEN_COMPONENT -->
+
+        <!-- GEN_FOOTER -->
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>my_order</title>
+<link href="/css/akg_my_order.css?27e0f5a094d54655dc93" rel="stylesheet"></head>
+
+<body :controller="vm" class="ms-controller">
+<div class="container">
+    <div class="div_navigation">
+        <div class="div_navigation_classification fon">
+            分类 <a href="#" class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown"></a>
+            <ul class="dropdown-menu" aria-labelledby="drop2">
+                <li :for='(index,item) in @classification_list'
+                    :attr="value:item.key" ><a href="#">{{@item.value}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--已经登陆的下拉框    （新加）-->
+        <div class="select_informations">
+            <div class="select_content" id="1">聊天信息</div>
+            <div class="select_content" id="2">我的订单</div>
+            <div class="select_content" id="3">购物车</div>
+            <div class="select_content" id="4">我的关注</div>
+            <div class="select_content" id="5">我的信息</div>
+            <div class="select_content" id="6">退出</div>
+        </div>
+
+        <div style="width: 66px;height: 28px;display: none;position: absolute;left: 1230px;top: 2px;z-index: 50" class="hidden_div"></div>
+
+
+        <div class="div_navigation_home_page">
+            <div class="home"><a href="#">首页</a></div>
+            <div class="home1"><a href="#" >商品列表</a></div>
+            <div class="home2"><a href="#" :click="@ldie">发布闲置</a></div>
+            <div class=" user"><a href="#" class="glyphicon glyphicon-user"></a><a href="#" data-toggle="modal"
+                                                                                   data-target="#myModal">{{@user}}</a></div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="test">
+                                &times;
+                            </button>
+                            <h1 class="modal-title text-center" id="myModalLabel">
+                                登录
+                            </h1>
+                        </div>
+
+
+                        <!--重构登陆-->
+                        <div class="login_main">
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-user"></i></div>
+                                <div class="input_texts"><input class="" type="text" placeholder="请输入账号" id="username"
+                                                                name="username" autofocus="autofocus" autocomplete="off"/></div>
+                            </div>
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-lock"></i></div>
+                                <div class="input_texts">
+                                    <input class="input_texts" type="password" placeholder="请输入密码" id="password"
+                                           name="password" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="login_footer">
+                                <button type="button" class="btn login_submit" id="land">登录</button>
+                                <div class="updata_password">
+                                    <i class="glyphicon glyphicon-question-sign"></i>
+                                    <span>修改密码</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
+    <!--个人页面-->
+    <div class="my_order">
+        <div class="triangle" id="triangle"></div>
+        <div class="self" ><a href="#" :click="@geren"><b>个人页面</b></a></div>
+        <div class="my_information"><a href="#" id="inf">基本信息</a></div>
+        <div class="my_orders"><a href="#" id="order">我的订单</a></div>
+        <div class="my_follow"><a href="#" id="follow">我的关注</a></div>
+        <div class="search_commodity">
+            <div class="relative_position">
+
+                <input type="text" class="search_commodity_text" placeholder="此处输入搜索商品" id="search_commodity_text">
+                <button type="button" class="search_commodity_btn" :click="serach_click">搜索</button>
+                <span class="img_search">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!--全部订单-->
+    <div class="full_order">
+        <div class="full_order_order">
+            <div class="full_order_order_relative">
+                <div class="order" id="all_order"><a href="#">全部订单</a></div>
+                <div class="item_order" id="item_order"><a href="#">我发布的物品订单</a>
+                    <!--<div class="chat_line_tips">{{unreadNum1}}</div>-->
+                </div>
+                <div class="Audit_order" id="Audit_order" :click="Audit_order"><a href="#">卖家审核中的订单</a>
+                    <!--<div class="chat_line_tips">{{unreadNum2}}</div>-->
+                </div>
+                <div class="wait_order" id="wait_order" :click="wait_order"><a href="#">等待确认购买的订单</a>
+                    <!--<div class="chat_line_tips">{{unreadNum3}}</div>-->
+                </div>
+                <div class="success_order" id="success_order" :click="success_order"><a href="#">成功交易订单</a>
+                    <!--<div class="chat_line_tips">{{unreadNum4}}</div>-->
+                </div>
+                <div class="error_order" id="error_order"><a href="#">失败交易订单</a>
+                    <!--<div class="chat_line_tips">{{unreadNum5}}</div>-->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="order_information">
+            <div class="full_order_order_relative2">
+                <!--//订单搜索-->
+                <div class="full_order_search">
+                    <div class="search_relative">
+                        <input type="text" class="input_order text-center" placeholder="输入商品标题或订单号进行搜索" id="input_order">
+                        <button type="button" class="search_order_btn" :click="serach_click1">搜索</button>
+                    </div>
+                </div>
+                <div class="baby">
+                    <div class="full_order_order_relative1">
+                        <div class="triangle1" id="triangle1"></div>
+                        <div class="tick">
+                            <input type="checkbox" class="checkbox_position" id="all2" :click="@checkAll2"
+                                   name="checkname[]">
+                        </div>
+                        <div class="name">宝贝</div>
+                        <div class="price">价格</div>
+                        <div class="number">数量</div>
+                        <div class="state"><a href="#" class=" dropdown-toggle" data-toggle="dropdown">交易状态</a>
+                            <ul class="dropdown-menu ul_size " aria-labelledby="drop2">
+                                <!--<li :for='(index,item) in @trading_state'-->
+                                    <!--:attr="value:item.key"><a href="#">{{@item.value}}</a></li>-->
+                                <li><a href="#" :click="success_order">成功交易</a></li>
+                                <li><a href="#" :click="wait_order">等待买家确认购买</a></li>
+                                <li><a href="#" :click="Audit_order">买家/卖家审核中</a></li>
+                            </ul>
+                        </div>
+                        <div class="operation">交易操作</div>
+                    </div>
+                </div>
+                <div class="baby_tail">
+                    <!--<div class="full_order_order_relative1">-->
+                        <!--<div class="whole_tick">-->
+                            <!--<input type="checkbox" class="whole_checkbox_position" id="all1" :click="@checkAll1"-->
+                                   <!--name="checkname[]">-->
+                            <!--<lable class="checkbox_text">全选</lable>-->
+                        <!--</div>-->
+                        <!--<div class="dele_name">批量删除</div>-->
+
+                    <!--</div>-->
+                </div>
+                <!--具体订单-->
+                <div class="order_specific_information">
+                    <div class="drop_down">
+                        <div class="order_specific_information_examine" :for="(index,item) in @buy_state1"
+                             :if="@number1" :attr="{id:'buy_state1_' + index}">
+                            <div class="order_specific_information_title">
+                                <div class="full_order_order_relative1">
+                                    <div class="tick1">
+                                        <input type="checkbox" class="checkbox_position1" name="checkname[]">
+                                    </div>
+                                    <div class="name2">
+                                        <span>{{item.time}}</span> 订单号<span>{{item.number}}</span>
+                                    </div>
+                                    <div class="seller_name">
+                                        <div style="display: inline-block;width: 9%;height: 100%;border-radius: 50%;margin-right: 3%;">
+                                        <img :attr="{src: @urlhttp + @item.userInfo[0].avatar}" class="img_comm2">
+                                        </div>
+                                        <span>{{item.userInfo[0].name}}</span>
+                                        <!--<span class="glyphicon glyphicon-user">{{item.userInfo[0].name}}</span>-->
+                                    </div>
+                                    <div class="trash">
+                                        <span class="glyphicon glyphicon-trash" :click="@clean1(index)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_content" :click="@order_specific_information_examine(index)"
+                                 :attr="{id:'order_specific_information_examine' + index}">
+                                <div class="img_name1">
+                                    <img :attr="{src: @urlhttp + @item.productInfo[0].icon}" class="img_comm">
+                                    <!--<div class="img_size" id="img_size1"></div>-->
+                                </div>
+                                <div class="name1 text-center">{{item.productInfo[0].name}}</div>
+                                <div class="price1">{{item.productInfo[0].price}}</div>
+                                <div class="number1">{{item.amount}}</div>
+                                <div class="state1">{{state1}}</div>
+                            </div>
+                            <div>
+                                <button type="button" class="operation1_btn" :click="@operation1_btn(index)">取消购买
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <div class="order_specific_information_wait" :for="(index,item) in @buy_state3" :if="@number3">
+                            <div class="order_specific_information_title">
+                                <div class="full_order_order_relative1">
+                                    <div class="tick1">
+                                        <input type="checkbox" class="checkbox_position1" name="checkname[]">
+                                    </div>
+                                    <div class="name2"><span>{{item.time}}</span> 订单号<span>{{item.number}}</span></div>
+                                    <div class="seller_name">
+                                        <div style="display: inline-block;width: 9%;height: 100%;border-radius: 50%;margin-right: 3%;">
+                                            <img :attr="{src: @urlhttp + @item.userInfo[0].avatar}" class="img_comm2">
+                                        </div>
+                                        <span>{{item.userInfo[0].name}}</span>
+                                    </div>
+                                    <div class="trash">
+                                        <span class="glyphicon glyphicon-trash" :click="@clean2(index)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_content" :click="@order_specific_information_wait(index)">
+                                <div class="img_name1">
+                                    <img :attr="{src:@urlhttp + item.productInfo[0].icon}" class="img_comm">
+                                    <!--<div class="img_size" id="img_size2"></div>-->
+                                </div>
+                                <div class="name1 text-center">{{item.productInfo[0].name}}</div>
+                                <div class="price1">{{item.productInfo[0].price}}</div>
+                                <div class="number1">{{item.amount}}</div>
+                                <div class="state1">{{state3}}</div>
+
+                            </div>
+                            <div>
+                                <button type="button" class="operation1_btn" data-toggle="modal"
+                                        data-target="#myModal_sell" :click="evaluateid(index)"
+                                :attr="{id:'seccess' + index}">未评价
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <div class="order_specific_information_wait" :for="(index,item) in @buy_state31" :if="@number3">
+                            <div class="order_specific_information_title">
+                                <div class="full_order_order_relative1">
+                                    <div class="tick1">
+                                        <input type="checkbox" class="checkbox_position1" name="checkname[]">
+                                    </div>
+                                    <div class="name2"><span>{{item.time}}</span> 订单号<span>{{item.number}}</span></div>
+                                    <div class="seller_name">
+                                        <div style="display: inline-block;width: 9%;height: 100%;border-radius: 50%;margin-right: 3%;">
+                                            <img :attr="{src: @urlhttp + @item.userInfo[0].avatar}" class="img_comm2">
+                                        </div>
+                                        <span>{{item.userInfo[0].name}}</span>
+                                    </div>
+                                    <div class="trash">
+                                        <span class="glyphicon glyphicon-trash" :click="@clean2(index)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_content" :click="@order_specific_information_wait31(index)">
+                                <div class="img_name1">
+                                    <img :attr="{src:@urlhttp + item.productInfo[0].icon}" class="img_comm">
+                                    <!--<div class="img_size" id="img_size2"></div>-->
+                                </div>
+                                <div class="name1 text-center">{{item.productInfo[0].name}}</div>
+                                <div class="price1">{{item.productInfo[0].price}}</div>
+                                <div class="number1">{{item.amount}}</div>
+                                <div class="state1">{{state3}}</div>
+
+                            </div>
+                            <div>
+                                <button type="button" class="operation1_btn" data-toggle="modal"
+                                        data-target="#myModal_sell" :click="evaluateid(index)"
+                                :attr="{id:'seccess' + index}">已评价
+                                </button>
+                            </div>
+                        </div>
+
+
+
+                        <div class="order_specific_information_success" :for="(index,item) in @buy_state2"
+                             :if="@number2">
+                            <div class="order_specific_information_title">
+                                <div class="full_order_order_relative1">
+                                    <div class="tick1">
+                                        <input type="checkbox" class="checkbox_position1" name="checkname[]">
+                                    </div>
+                                    <div class="name2"><span>{{item.time}}</span> 订单号<span>{{item.number}}</span></div>
+                                    <div class="seller_name">
+                                        <div style="display: inline-block;width: 9%;height: 100%;border-radius: 50%;margin-right: 3%;">
+                                            <img :attr="{src: @urlhttp + @item.userInfo[0].avatar}" class="img_comm2">
+                                        </div>
+                                        <span>{{item.userInfo[0].name}}</span>
+                                    </div>
+                                    <div class="trash">
+                                        <span class="glyphicon glyphicon-trash" :click="@clean3(index)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_content" :click="@order_specific_information_success(index)">
+                                <div class="img_name1">
+                                    <img :attr="{src:@urlhttp + item.productInfo[0].icon}" class="img_comm">
+                                    <!--<div class="img_size" id="img_size3"></div>-->
+                                </div>
+                                <div class="name1 text-center">{{item.productInfo[0].name}}</div>
+                                <div class="price1">{{item.productInfo[0].price}}</div>
+                                <div class="number1">{{item.amount}}</div>
+                                <div class="state1">{{state2}}</div>
+                            </div>
+                            <div>
+                                <button type="button" class="operation1_btn_immediately"
+                                        :click="@operation1_btn2(index)">
+                                    立即购买
+                                </button>
+                                <button type="button" class="operation1_btn_cancel" :click="@operation2_btn(index)">取消购买
+                                </button>
+
+                            </div>
+                        </div>
+
+
+                        <div class="order_specific_information_error" :for="(index,item) in @buy_state4" :if="@number4">
+                            <div class="order_specific_information_title">
+                                <div class="full_order_order_relative1">
+                                    <div class="tick1">
+                                        <input type="checkbox" class="checkbox_position1" name="checkname[]">
+                                    </div>
+                                    <div class="name2"><span>{{item.time}}</span> 订单号<span>{{item.number}}</span></div>
+                                    <div class="seller_name">
+                                        <div style="display: inline-block;width: 9%;height: 100%;border-radius: 50%;margin-right: 3%;">
+                                            <img :attr="{src: @urlhttp + @item.userInfo[0].avatar}" class="img_comm2">
+                                        </div>
+                                        <span>{{item.userInfo[0].name}}</span>
+                                    </div>
+                                    <div class="trash">
+                                        <span class="glyphicon glyphicon-trash" :click="@clean4(index)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_content" :click="@order_specific_information_error(index)">
+                                <div class="img_name1">
+                                    <img :attr="{src:@urlhttp + item.productInfo[0].icon}" class="img_comm">
+                                    <!--<div class="img_size" id="img_size4"></div>-->
+                                </div>
+                                <div class="name1 text-center">{{item.productInfo[0].name}}</div>
+                                <div class="price1">{{item.productInfo[0].price}}</div>
+                                <div class="number1">{{item.amount}}</div>
+                                <div class="state1">{{state4}}</div>
+                            </div>
+                        </div>
+
+
+                        <!--我发布的-->
+                        <div class="order_specific_information_wait" :for="(index,item) in @sell1" :if="@number5">
+                            <div class="order_specific_information_title">
+                                <div class="full_order_order_relative1">
+                                    <div class="tick1">
+                                        <input type="checkbox" class="checkbox_position1" name="checkname[]">
+                                    </div>
+                                    <div class="name2"><span>{{item.time}}</span> 订单号<span>{{item.number}}</span></div>
+                                    <div class="seller_name">
+                                        <div style="display: inline-block;width: 9%;height: 100%;border-radius: 50%;margin-right: 3%;">
+                                            <img :attr="{src: @urlhttp + @item.userInfo[0].avatar}" class="img_comm2">
+                                        </div>
+                                        <span>{{item.userInfo[0].name}}</span>
+                                    </div>
+                                    <div class="trash">
+                                        <span class="glyphicon glyphicon-trash" :click="@clean5(index)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_content" :click="@order_specific_information_wait1(index)">
+                                <div class="img_name1">
+                                    <img :attr="{src:@urlhttp + item.productInfo[0].icon}" class="img_comm">
+                                    <!--<div class="img_size" id="img_size2"></div>-->
+                                </div>
+                                <div class="name1 text-center">{{item.productInfo[0].name}}</div>
+                                <div class="price1">{{item.productInfo[0].price}}</div>
+                                <div class="number1">{{item.amount}}</div>
+                                <div class="state1">{{state1}}</div>
+
+                            </div>
+                            <div>
+                                <button type="button" class="operation1_btn_sell" :click="operation1_btn_sell(index)">卖给Ta
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="order_specific_information_wait" :for="(index,item) in @sell2" :if="@number5">
+                            <div class="order_specific_information_title">
+                                <div class="full_order_order_relative1">
+                                    <div class="tick1">
+                                        <input type="checkbox" class="checkbox_position1" name="checkname[]">
+                                    </div>
+                                    <div class="name2"><span>{{item.time}}</span> 订单号<span>{{item.number}}</span></div>
+                                    <div class="seller_name">
+                                        <div style="display: inline-block;width: 9%;height: 100%;border-radius: 50%;margin-right: 3%;">
+                                            <img :attr="{src: @urlhttp + @item.userInfo[0].avatar}" class="img_comm2">
+                                        </div>
+                                        <span>{{item.userInfo[0].name}}</span>
+                                    </div>
+                                    <div class="trash">
+                                        <span class="glyphicon glyphicon-trash" :click="@clean6(index)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_content" :click="@order_specific_information_wait2(index)">
+                                <div class="img_name1">
+                                    <img :attr="{src:@urlhttp + item.productInfo[0].icon}" class="img_comm">
+                                    <!--<div class="img_size" id="img_size2"></div>-->
+                                </div>
+                                <div class="name1 text-center">{{item.productInfo[0].name}}</div>
+                                <div class="price1">{{item.productInfo[0].price}}</div>
+                                <div class="number1">{{item.amount}}</div>
+                                <div class="state1">{{state3}}</div>
+
+                            </div>
+                            <div>
+                                <button type="button" class="operation1_btn" :click="@operation1_btn_evaluate(index)">查看评价
+                                </button>
+                            </div>
+                        </div>
+
+
+
+                        <!--更换买家-->
+                        <div class="order_specific_information_wait" :for="(index,item) in @sell3" :if="@number5">
+                            <div class="order_specific_information_title">
+                                <div class="full_order_order_relative1">
+                                    <div class="tick1">
+                                        <input type="checkbox" class="checkbox_position1" name="checkname[]">
+                                    </div>
+                                    <div class="name2"><span>{{item.time}}</span> 订单号<span>{{item.number}}</span></div>
+                                    <div class="seller_name">
+                                        <div style="display: inline-block;width: 9%;height: 100%;border-radius: 50%;margin-right: 3%;">
+                                            <img :attr="{src: @urlhttp + @item.userInfo[0].avatar}" class="img_comm2">
+                                        </div>
+                                        <span>{{item.userInfo[0].name}}</span>
+                                    </div>
+                                    <div class="trash">
+                                        <span class="glyphicon glyphicon-trash" :click="@clean7(index)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_content" :click="@order_specific_information_wait3(index)">
+                                <div class="img_name1">
+                                    <img :attr="{src:@urlhttp + item.productInfo[0].icon}" class="img_comm">
+                                    <!--<div class="img_size" id="img_size2"></div>-->
+                                </div>
+                                <div class="name1 text-center">{{item.productInfo[0].name}}</div>
+                                <div class="price1">{{item.productInfo[0].price}}</div>
+                                <div class="number1">{{item.amount}}</div>
+                                <div class="state1">{{state5}}</div>
+
+                            </div>
+                            <!--<div>-->
+                                <!--<button type="button" class="operation1_btn_sell" :click="@operation1_btn_evaluate">-->
+                                <!--</button>-->
+                            <!--</div>-->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--评价模态框-->
+
+    <div class="modal_sell">
+        <div class="modal fade madal_margin" id="myModal_sell" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal_style">
+                        <div style="width: 95%;margin: auto;">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="div_modal_center" style="margin-top: 2%;color: #000;">
+                            <b>评论卖家</b>
+                        </div>
+                        <div style="width: 90%;padding-left: 8%;height: 60%;margin-bottom: 3%;">
+                            <textarea rows="7" cols="42" placeholder="请输入您的评价" class="textarea" id="evaluate"></textarea>
+                        </div>
+                        <div style="text-align: center;width: 100%;height: 10%;">
+                            <button type="button"
+                                    style="width: 10%;height:100%;text-align: center;background-color: red;color: white;"
+                                    data-dismiss="modal" aria-hidden="true"  :click="evaluate">提交
+                            </button>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+    </div>
+
+
+    <!--选择买家-->
+    <div class="modal_sell">
+        <div class="modal fade madal_margin" id="my_sell" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog" id="aaa">
+                <div class="modal-content">
+                    <div class="modal_style1">
+                        <div style="width: 95%;margin: auto;">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                        </div>
+                        <div style="width: 100%;height: auto;">
+                            <div style="width: 100%;height: 40px;"></div>
+                            <div style="width: 90%;height: 60px;margin-left:5%;border-bottom: 1px solid #f1f1f1;" :for="(index,item) in @sell1">
+                                <div style="width: 25%;display: inline-block;height: 100%;vertical-align: top;">
+                                    <img :attr="{src:@urlhttp + @item.userInfo[0].avatar}" class="img_comm1">
+
+                                </div>
+                                <div style="width: 25%;display: inline-block;height: auto;vertical-align: top;margin-top: 8%;margin-left: 6%;">
+                                    {{item.userInfo[0].name}}
+                                </div>
+                                <div style="width: 25%;display: inline-block;background-color: #0d39;height: 50%;margin-left: 14%;vertical-align: top;margin-top: 6%">
+                                    <button type="button"
+                                            style="color: white;background-color: red;height: 100%;width: 100%;outline:none;">卖给Ta
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+    </div>
+
+
+    <!--尾-->
+    <div class="tail">
+        <div class="div_logo_img">
+            <img :attr="{src:@img_logo}" class="img_logo">
+        </div>
+        <div class="tail_title_font_size">
+            <p><b>便民嘟嘟站，全心全意为大学生服务</b></p>
+            <p>©️2018-2018 华南理工大学广州学院计算机工程学院2016级软件一班便民嘟嘟站 版权所有</p>
+        </div>
+    </div>
+</div>
+<script src="/js/common.js.js?27e0f5a094d54655dc93"></script><script src="/js/akg_my_order.js?27e0f5a094d54655dc93"></script></body>
+
+</html>

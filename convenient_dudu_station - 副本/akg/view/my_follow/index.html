@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>my_follow</title>
+</head>
+
+<body :controller="vm" class="ms-controller">
+<div class="container">
+    <div class="div_navigation">
+        <div class="div_navigation_classification fon">
+            分类 <a href="#" class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown"></a>
+            <ul class="dropdown-menu" aria-labelledby="drop2">
+                <li :for='(index,item) in @classification_list'
+                    :attr="value:item.key" ><a href="#">{{@item.value}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--已经登陆的下拉框    （新加）-->
+        <div class="select_informations">
+            <div class="select_content" id="1">聊天信息</div>
+            <div class="select_content" id="2">我的订单</div>
+            <div class="select_content" id="3">购物车</div>
+            <div class="select_content" id="4">我的关注</div>
+            <div class="select_content" id="5">我的信息</div>
+            <div class="select_content" id="6">退出</div>
+        </div>
+
+        <div style="width: 66px;height: 28px;display: none;position: absolute;left: 1230px;top: 2px;z-index: 50" class="hidden_div"></div>
+
+
+        <div class="div_navigation_home_page">
+            <div class="home"><a href="#">首页</a></div>
+            <div class="home1"><a href="#" >商品列表</a></div>
+            <div class="home2"><a href="#" :click="@ldie">发布闲置</a></div>
+            <div class=" user"><a href="#" class="glyphicon glyphicon-user"></a><a href="#" data-toggle="modal"
+                                                                                   data-target="#myModal">{{@user}}</a></div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="test">
+                                &times;
+                            </button>
+                            <h1 class="modal-title text-center" id="myModalLabel">
+                                登录
+                            </h1>
+                        </div>
+
+
+                        <!--重构登陆-->
+                        <div class="login_main">
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-user"></i></div>
+                                <div class="input_texts"><input class="" type="text" placeholder="请输入账号" id="username"
+                                                                name="username" autofocus="autofocus" autocomplete="off"/></div>
+                            </div>
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-lock"></i></div>
+                                <div class="input_texts">
+                                    <input class="input_texts" type="password" placeholder="请输入密码" id="password"
+                                           name="password" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="login_footer">
+                                <button type="button" class="btn login_submit" id="land">登录</button>
+                                <div class="updata_password">
+                                    <i class="glyphicon glyphicon-question-sign"></i>
+                                    <span>修改密码</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
+    <!--个人页面-->
+    <div class="my_order">
+        <div class="triangle" id="triangle"></div>
+        <div class="self" ><b><a href="#" id="self">个人页面</a></b></div>
+        <div class="my_information"><a href="#" id="inf">基本信息</a></div>
+        <div class="my_orders"><a href="#" id="order">我的订单</a></div>
+        <div class="my_follow"><a href="#" id="follow">我的关注</a></div>
+        <div class="search_commodity">
+            <div class="relative_position">
+
+                <input type="text" class="search_commodity_text" placeholder="此处输入搜索商品" id="form_control">
+                <button type="button" class="search_commodity_btn" :click="serach_click">搜索</button>
+                <span class="img_search">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="my_follow_con">
+        <div class="my_follow_con_user">
+            <div style="display: inline-block;width: 18%;height: 100%;margin: 0px;vertical-align: top;">
+                <div class="sell_head_img">
+                    <img :attr="{src:@urlhttp + @user_img}" class="img_logo1">
+                </div>
+            </div>
+            <div class="my_follow_inf">
+                <div style="width: 100%;height: 20%;margin-top: 5%; font-size: 18px;">
+                    {{name}}
+                </div>
+                <div style="width: 100%;height: 20%;margin-top: 5%; font-size:14px;color: #DD6F94; ">粉丝8人</div>
+                <div style="width: 100%;height: 20%;margin-top: 5%; font-size:14px;color: #DD6F94;">商品被喜欢88次</div>
+            </div>
+        </div>
+        <div class="my_follow_con_follow">
+            <div style="display: inline-block;width: 20%;background-color: #FF9800;border: 1px solid #f1f1f1;height: 100%;line-height: 50%;text-align: center;vertical-align:middle;padding-top: 1.5%;">
+                <span style="color: white">喜欢商品</span>
+            </div>
+            <div style="display: inline-block;margin-left: 60%;position:relative;">
+                <input type="text" style="width: 110%;" placeholder="搜索我的喜欢" id="my_love_search">
+                <span class="img_search1">
+                    <span class="glyphicon glyphicon-search" :click="my_love_search" ></span>
+                </span>
+            </div>
+        </div>
+        <div class="my_follow_con_commodity">
+            <div style="width: 100%;height: auto;overflow: hidden;">
+                <div style="width: 100%;height:100%;overflow-y: hidden;">
+                    <div class="my_follow_commodity" :for="(index,item) in @datacollect">
+                        <div style="width: 100%;height: 80%;" >
+                            <img :attr="{src:@urlhttp + @item.products[0].icon}" style="width: 100%;height: 100%":click="@my_follow_commodity(index)">
+                        </div>
+                        <div style="width: 100%;height: 20%;border: 1px solid #f1f1f1;">
+                            <div style="margin-left: 4%;margin-top: 1%;color: red;">￥{{item.products[0].price}}</div>
+                            <div style="margin-left: 4%;margin-top: 1%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.products[0].name}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--尾-->
+    <div class="tail">
+        <div class="div_logo_img">
+            <img :attr="{src:@img_logo}" class="img_logo">
+        </div>
+        <div class="tail_title_font_size">
+            <p><b>便民嘟嘟站，全心全意为大学生服务</b></p>
+            <p>©️2018-2018 华南理工大学广州学院计算机工程学院2016级软件一班便民嘟嘟站 版权所有</p>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

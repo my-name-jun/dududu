@@ -1,0 +1,664 @@
+@import "../../lib/common.scss";
+html, body,container, * {
+  margin: 0px;
+  padding: 0px;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  width: 1440px;
+  height: auto;
+}
+
+.div_navigation_home_page a{
+  text-decoration: none;
+}
+
+
+//导航栏
+.div_navigation {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  border-bottom: 1px solid #F1F1F1;
+}
+.div_navigation_classification {
+  position: relative;
+  text-align: center;
+  //padding-left: 5%;
+  width: 125px;
+  height: 25px;
+  //font-size: 0.88rem;
+  //border: 1px solid;
+  //padding-left: 10%;
+}
+.fon {
+  margin-top: 10px;
+  font-size: 14PX;
+  //width: 30%;
+  margin-left: 8%;
+}
+.div_navigation_home_page{
+  width: 1220px;
+  height: 46px;
+  position: absolute;
+  top:0%;
+  left: 19%;
+  //border: 1px solid;
+}
+.home{
+  width: 108px;
+  height: 30px;
+  font-size: 14PX;
+  position: absolute;
+  top: 3%;
+  left: 0%;
+  text-align: center;
+  //border-bottom:3px solid #2579B4 ;
+}
+.home1{
+  width: 108px;
+  height: 30px;
+  font-size: 14PX;
+  position: absolute;
+  top: 3%;
+  left: 9%;
+  text-align: center;
+  //border-bottom:5px solid #f1f1f1 ;
+}
+.home2{
+  width: 108px;
+  height: 30px;
+  font-size: 14px;
+  position: absolute;
+  top: 3%;
+  left: 18%;
+  text-align: center;
+  //border-bottom:2px solid #2579B4 ;
+}
+.user{
+  position: absolute;
+  top: 15%;
+  left: 65%;
+  width: 108px;
+  font-size: 1px;
+  //border-bottom:5px solid #f1f1f1 ;
+}
+
+///////////////////////////////
+
+//logo,搜索
+.div_logo {
+  width: 90%;
+  height: 155px;
+  // border: 1px solid;
+  margin: 1% auto auto auto;
+  position: relative;
+}
+.div_content {
+  width: 60%;
+  height: auto;
+  margin: auto;
+  //border: 1px solid;
+}
+.img_logo {
+  position: absolute;
+  width: 220px;
+  height: 122px;
+}
+.search_text {
+  position: absolute;
+  width: 340px;
+  height: 34px;
+  top: 33%;
+  left: 65%;
+}
+.search {
+  position: absolute;
+  width: 58px;
+  height: 24px;
+  top: 37%;
+  left: 100%;
+  background-color: #337ab7;
+  text-align: center;
+}
+.logo_text{
+  position: absolute;
+  top: 29%;
+  left: 15%;
+  font-size: 2em;
+}
+.form-control{
+  height: 40px;
+}
+
+////////////////////////
+
+//改过的登陆
+.login_main{
+  width: 100%;
+  height: 270px;
+  padding: 10%;
+  margin-top: -3%;
+}
+.login_input{
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
+  padding-left: 5%;
+  margin-bottom: 5%;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-text-fill-color: #333;
+}
+.input_icon{
+  width: 15%;
+  font-size: 18px;
+  display: inline-block;
+  line-height: 20px;
+  background-color: rgba(242, 242, 242, 1);
+  text-align: center;
+  border: 1px solid rgba(187, 187, 187, 0.3);
+  padding: 2% 0 2% 0.5%;
+}
+.input_texts{
+  width: 70%;
+  display: inline-block;
+  line-height: 20px;
+  //background-color: rgba(242, 242, 242, 1);
+  text-align: left;
+  padding-left: 9%;
+  border: 1px solid rgba(187, 187, 187, 0.3);
+  border-left: 0;
+  vertical-align: bottom;
+}
+.input_texts input{
+  outline: none;
+  margin: 3%;
+  text-align: left;
+  width: 95%;
+  border: 0;
+}
+.login_footer{
+  width: 55%;
+  margin: 0 20%;
+}
+.login_submit{
+  width: 100%;
+  height: auto;
+  line-height: 20px;
+  background-color: rgba(78, 143, 209, 1);
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  text-align: center;
+  font-family: Roboto;
+  border: 1px solid rgba(187, 187, 187, 1);
+  padding: 2%;
+}
+.updata_password{
+  width: 35%;
+  height: auto;
+  color: rgba(16, 16, 16, 1);
+  font-size: 14px;
+  text-align: left;
+  font-family: SourceHanSansSC-regular;
+  margin: 4% 0 0 65%;
+  cursor: pointer;
+}
+.updata_password span{
+  margin-left: 9%;
+}
+
+//已登录状态
+.select_informations{
+  position: absolute;
+  left: 59%;
+  top: 30px;
+  width: 110px;
+  height: 182.5px;
+  line-height: 30px;
+  border-radius: 8px;
+  color: rgba(16, 16, 16, 1);
+  font-size: 14px;
+  text-align: center;
+  font-family: Roboto;
+  border: 1px solid rgba(89, 89, 89, 1);
+  background-color: white;
+  z-index: 999;
+  cursor: pointer;
+  display: none;
+}
+.select_information{
+  width: 138px;
+  height: 39px;
+  line-height: 20px;
+  border-radius: 8px 8px 0px 0px;
+  background-color: rgba(73, 101, 247, 0.4);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0);
+
+}
+
+/////////////////////////
+
+//个人页面
+.my_order {
+  position: relative;
+  width: 100%;
+  height: 85px;
+  //border: 1px ;
+  background-color: #67ACE6;
+}
+.my_order a{
+  text-decoration: none;
+  color: white;
+}
+.self {
+  position: absolute;
+  top: 25%;
+  left: 8%;
+  width: 10%;
+  height: auto;
+  color: white;
+  font-size: 30px;
+}
+
+.my_information {
+  position: absolute;
+  top: 35%;
+  left: 25%;
+  width: auto;
+  height: auto;
+  color: white;
+  font-size: 18px;
+}
+
+.my_orders {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  width: auto;
+  height: auto;
+  color: white;
+  font-size: 18px;
+}
+
+.my_follow {
+  position: absolute;
+  top: 35%;
+  left: 45%;
+  width: auto;
+  height: auto;
+  color: white;
+  font-size: 18px;
+}
+
+.search_commodity {
+  position: absolute;
+  top: 35%;
+  left: 60%;
+  width: 30%;
+  height: 40%;
+  //border: 1px solid;
+}
+
+.search_commodity_text {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  width: 60%;
+  text-align: center;
+}
+.search_commodity_btn{
+  position: absolute;
+  top: 0%;
+  left: 60%;
+  height: 100%;
+  text-align: center;
+  width: 15%;
+}
+.relative_position {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  //border: 1px solid;
+  //background: #0f0f0f;
+}
+.img_search{
+  position: absolute;
+  top: 15%;
+  left: 2%;
+  font-size: 20px;
+}
+
+
+
+
+.triangle{
+  position: absolute;
+  top: 88%;
+  left: 11%;
+}
+.triangle1{
+  position: absolute;
+  top: 42%;
+  left: 75%;
+}
+
+#triangle{
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid white;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+#triangle1{
+  width: 0;
+  height: 0;
+  border-top:10px solid #565656;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+
+//modal
+.modal{
+  display: none;
+}
+
+.modal_name{
+  line-height: 4em;
+  font-size: 1em;
+}
+
+.modal-dialog{
+  width: 40%;
+}
+
+#user_img{
+  border: 1px solid black;
+}
+
+.modal-body{
+  width: 100%;
+  height: 35em;
+  background-color:#FAFDFF ;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.input_text{
+  width: 100%;
+  height: 5em;
+  resize: none;
+  border: none;
+}
+
+.friend{
+  margin: 2em 0;
+}
+.me{
+  margin: 2em 0;
+  text-align: right;
+}
+
+.friend_img{
+  line-height: 3em;
+  height: 3em;
+  width: 3em;
+  display: inline-block;
+  border-radius: 800px;
+  margin: 0 1%;
+}
+
+.content{
+  padding: 2%;
+  min-width: 4em;
+  max-width: 30em;
+  background-color: white;
+  border: solid 1px #D7D7D7;
+  display: inline-block;
+  border-radius: 15px;
+}
+
+//左容器、上方个人信息
+.main{
+  width: 100%;
+  position: relative;
+}
+
+.left_container{
+  width: 65%;
+  padding: 3% 2% 2% 15%;
+}
+
+.left_info{
+  width: 100%;
+}
+
+.left_info_header{
+  position: relative;
+  background-color: #f4f8fb;
+  border: #edf1f4 solid 1px;
+}
+
+
+.left_info_header_img{
+  margin: 0.5% 2% 0 5%;
+  text-align: center;
+  max-height: 5em;
+  max-width: 5em;
+  float: left;
+  border-radius: 800px;
+}
+
+.friend_avatar{
+  width: 3em;
+  height: 3em;
+  border-radius: 800px;
+}
+.my_avatar{
+  width: 3em;
+  height: 3em;
+  border-radius: 800px;
+}
+
+.left_info_header_name{
+  font-size: 1em;
+  line-height: 6em;
+}
+
+.left_info_header_fans{
+  font-size: 1em;
+  position: absolute;
+  left: 80%;
+  top: 50%;
+}
+
+.left_info_header_fork{
+  font-size: 1em;
+  position: absolute;
+  left: 90%;
+  left: 90%;
+  top: 50%;
+}
+
+.left_info_footer{
+  clear: both;
+  background-color: white;
+  width: 100%;
+  position: relative;
+  border: #edf1f4 solid 1px;
+}
+
+.left_info_footer_box{
+  width: 20%;
+  text-align: center;
+  padding: 1% 5%;
+  font-size: 1em;
+  display: inline-block;
+}
+
+.box_despare{
+  position: absolute;
+  width:0.1%;
+  height: 2em;
+  display: inline;
+  background-color: #dee5ea;
+  top: 20%;
+}
+
+.history{
+  clear: both;
+  width: 65%;
+  padding: 0 2% 5% 15%;
+}
+
+.history_header{
+  width: 100%;
+  background-color: #FF5B92;
+  color: white;
+  font-weight: bold;
+  padding: 0.8% 5%;
+  font-size: 1.5em;
+}
+
+.history_container{
+  width: 100%;
+  height: 70em;
+  background-color: #FFFCFD;
+}
+
+.history_goods{
+  width: 25%;
+  margin: 1% 4% 2% 4%;
+  border: solid 1px #BBBBBB;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.price{
+  font-size: 1em;
+  color: red;
+  padding-top: 3%;
+  margin-left: 5%;
+}
+
+.before_price{
+  position: absolute;
+  left: 65%;
+  top: 84%;
+  width: 100%;
+  font-size: 0.7em;
+  text-decoration: line-through;
+}
+
+.goods_name{
+  font-size: 1em;
+  margin-left: 5%;
+  line-height: 2em;
+}
+
+.history_goods_img{
+  width: 100%;
+  height: 17.7em;
+  background-color: black;
+}
+
+//聊天列表
+.chat{
+  position: absolute;
+  width: 20%;
+  top: 4.5%;
+  left: 65%;
+  border: solid 1px #BBBBBB;
+}
+
+.chat_header{
+  background-color: #2BBBAE;
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  padding: 2% 5%;
+  font-size: 1.5em;
+  border: solid 1px #BBBBBB;
+}
+
+.chat_list{
+  width: 100%;
+  height: 80em;
+}
+
+.chat_line{
+  width: 80%;
+  margin-left: 10%;
+  position: relative;
+  border-bottom: solid #BBBBBB 1px;
+  clear: both;
+  padding: 2% 0;
+}
+
+.chat_line:hover{
+  cursor: pointer;
+  background-color: #C9E1DF;
+}
+
+.chat_line_img{
+  margin: 3% 2% 3% 5%;
+  font-size: 1em;
+  height: 3em;
+  width: 3em;
+  float: left;
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid black;
+}
+
+.chat_line_name{
+  line-height: 4em;
+  font-size: 1em;
+}
+
+.chat_line_tips{
+  width: 18%;
+  background-color: #E51C23;
+  font-size: 1em;
+  color: white;
+  border: #BBBBBB solid 1px;
+  text-align: center;
+  border-radius: 20px;
+  position: absolute;
+  top: 35%;
+  left: 70%;
+  line-height: 1.8em;
+}
+
+
+//FOOTER
+
+.div_logo_img{
+  margin-left: 10%;
+}
+
+.tail {
+  position: relative;
+  width: 100%;
+  height: 172px;
+  border-top: 1px solid;
+  margin: auto;
+}
+
+.tail_title_font_size{
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: auto;
+  height: auto;
+}
+
+
+//GEN_SASS

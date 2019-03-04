@@ -1,0 +1,26 @@
+{
+  "name": "cignacmb",
+  "description": "投保系统",
+  "main": "index.js",
+  "authors": [
+    "wufan"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "webpack",
+    "前端工程化",
+    "web",
+    "JavaScript"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

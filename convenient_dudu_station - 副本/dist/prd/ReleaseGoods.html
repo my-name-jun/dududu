@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ReleaseGoods</title>
+<link href="/css/ReleaseGoods.css?27e0f5a094d54655dc93" rel="stylesheet"></head>
+<body :controller="vm" class="ms-controller">
+<div class="container" id="container">
+    <!-- HEADER -->
+    <div class="div_navigation">
+        <div class="div_navigation_classification fon">
+            分类 <a href="#" class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown"></a>
+            <ul class="dropdown-menu" aria-labelledby="drop2">
+                <li :for='(index,item) in @classification_list'
+                    :attr="value:item.key"><a href="#">{{@item.value}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--已经登陆的下拉框    （新加）-->
+        <div class="select_informations">
+            <div class="select_content" id="1">聊天信息</div>
+            <div class="select_content" id="2">我的订单</div>
+            <div class="select_content" id="3">购物车</div>
+            <div class="select_content" id="4">我的关注</div>
+            <div class="select_content" id="5">我的信息</div>
+            <div class="select_content" id="6">退出</div>
+        </div>
+
+        <div style="width: 66px;height: 28px;display: none;position: absolute;left: 82%;top: 2px;z-index: 50"
+             class="hidden_div"></div>
+
+
+        <div class="div_navigation_home_page">
+            <div class="home"><a href="index.html">首页</a></div>
+            <div class="home1"><a href="commodity_list.html">商品列表</a></div>
+           <div class="home2"><a href="ReleaseGoods.html" >发布闲置</a></div>
+            <div class=" user"><a href="#" class="glyphicon glyphicon-user"></a><a href="#" data-toggle="modal"
+                                                                                   data-target="#myModal2">{{@user}}</a>
+            </div>
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="test">
+                                &times;
+                            </button>
+                            <h1 class="modal-title text-center" id="myModalLabel2">
+                                登录
+                            </h1>
+                        </div>
+
+
+                        <!--重构登陆-->
+                        <div class="login_main">
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-user"></i></div>
+                                <div class="input_texts"><input class="" type="text" placeholder="请输入账号" id="username"
+                                                                name="username" autofocus="autofocus"
+                                                                autocomplete="off"/></div>
+                            </div>
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-lock"></i></div>
+                                <div class="input_texts">
+                                    <input class="input_texts" type="password" placeholder="请输入密码" id="password"
+                                           name="password" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="login_footer">
+                                <button type="button" class="btn login_submit" id="land">登录</button>
+                                <div class="updata_password">
+                                    <i class="glyphicon glyphicon-question-sign"></i>
+                                    <span>修改密码</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
+
+    <!--logo,搜索-->
+    <div class="div_content">
+        <!--logo-->
+        <div class="div_logo">
+            <img :attr="{src:@img_logo}" class="img_logo">
+
+            <div class="logo_text">发布闲置</div>
+
+            <div class="input-group search_text">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                <input type="text" class="form-control" placeholder="此处输入搜索商品" id="form_control">
+            </div>
+            <div class="search bs-example">
+                <button type="button" class="btn btn-primary " :click="serach_click">搜索</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--MODAL-->
+    <!-- 按钮触发模态框 -->
+    <button id="modal_btn" class="btn btn-primary btn-lg modal" data-toggle="modal" data-target="#myModal">开始演示模态框
+    </button>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!--test-->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="cropper_div">
+                        <img class="cropper_img" id="modal_img">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary footer_font" id="cropper_btn">保存修改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!--CENTER-->
+    <div class="center">
+        <!--商品图片-->
+        <div class="center_component">
+            <div class="center_component_header">
+                <b>商品图片</b>
+                <p class="center_component_p">(最多上传5张)</p>
+            </div>
+            <div class="img">
+                <label class="btn btn-info" id="photo1">
+                    <input type="file" class="mFileInput" id="input1" style="left:-9999px;position:absolute;">
+                    <img :attr="{src:@photo_add}" id="img1">
+                </label>
+                <label class="btn btn-info" id="photo2">
+                    <input type="file" class="mFileInput" id="input2" style="left:-9999px;position:absolute;">
+                    <img :attr="{src:@photo_add}" id="img2">
+                </label>
+                <label class="btn btn-info" id="photo3">
+                    <input type="file" class="mFileInput" id="input3" style="left:-9999px;position:absolute;">
+                    <img :attr="{src:@photo_add}" id="img3">
+                </label>
+                <label class="btn btn-info" id="photo4">
+                    <input type="file" class="mFileInput" id="input4" style="left:-9999px;position:absolute;">
+                    <img :attr="{src:@photo_add}" id="img4">
+                </label>
+                <label class="btn btn-info" id="photo5">
+                    <input type="file" class="mFileInput" id="input5" style="left:-9999px;position:absolute;">
+                    <img :attr="{src:@photo_add}" id="img5">
+                </label>
+            </div>
+            <div class="delete_line" id="del1"><img id="del_img1" class="delete_icon" :attr="{src:@delete_icon}"></div>
+            <div class="delete_line" id="del2"><img class="delete_icon" :attr="{src:@delete_icon}"></div>
+            <div class="delete_line" id="del3"><img class="delete_icon" :attr="{src:@delete_icon}"></div>
+            <div class="delete_line" id="del4"><img class="delete_icon" :attr="{src:@delete_icon}"></div>
+            <div class="delete_line" id="del5"><img class="delete_icon" :attr="{src:@delete_icon}"></div>
+
+
+        </div>
+        <!--商品名称-->
+        <div class="center_component">
+            <div class="center_component_header">
+                <b>商品名称</b>
+                <p class="center_component_p">(最多输入30个字)</p>
+            </div>
+            <input type="text" class="center_component_name_input" id="input_name">
+        </div>
+        <!--商品价格-->
+        <div class="center_component">
+            <div class="center_component_header">
+                <b>商品价格</b>
+            </div>
+            <input type="text" class="center_component_price_input" id="input_price">
+            <p class="price_p">元&emsp;(人民币)</p>
+        </div>
+        <!--商品库存-->
+        <div class="center_component">
+            <div class="center_component_header">
+                <b>库存</b>
+            </div>
+            <input type="text" class="center_component_price_input" id="input_storage">
+            <p class="price_p">件</p>
+        </div>
+
+        <div></div>
+        <!--分类-->
+        <div class="center_component_left">
+            <div class="center_component_header">
+                <b>一级分类</b>
+            </div>
+            <select id="category_one" class="component_select" :duplex="category_one">
+                <option :for='(index,item) in @category_list'
+                        :attr="{value:@item.id}">
+                    {{@item.name}}
+                </option>
+            </select>
+        </div>
+        <div class="center_component_right">
+            <div class="center_component_header">
+                <b>二级分类</b>
+            </div>
+            <select id="category_two" class="component_select" :duplex="category">
+                <option :for='(index,item) in @category_two'
+                        :attr="{value:@item.id}">
+                    {{@item.name}}
+                </option>
+            </select>
+        </div>
+        <!--&lt;!&ndash;成色&ndash;&gt;-->
+        <!--<div class="center_component">-->
+        <!--<div class="center_component_header">-->
+        <!--<b>成色</b>-->
+        <!--</div>-->
+        <!--<select class="component_select"  :duplex="degree">-->
+        <!--<option :for='(index,item) in @degree_list'-->
+        <!--:attr="{value:@item.id}">-->
+        <!--{{@item.name}}-->
+        <!--</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--商品描述-->
+        <div class="center_component">
+            <div class="center_component_header">
+                <b>商品描述</b>
+            </div>
+            <textarea rows="20" class="center_component_describe_input" id="input_description">
+            </textarea>
+        </div>
+        <!--提交btn-->
+        <div>
+            <button class="center_component_btn" id="submit">提交</button>
+        </div>
+    </div>
+
+    <!--FOOTER-->
+    <div class="tail">
+        <div class="div_logo_img">
+            <img :attr="{src:@img_logo}" class="img_logo">
+        </div>
+        <div class="tail_title_font_size">
+            <p><b>便民嘟嘟站，全心全意为大学生服务</b></p>
+            <p>©️2018-2018 华南理工大学广州学院计算机工程学院2016级软件一班便民嘟嘟站 版权所有</p>
+        </div>
+    </div>
+    <!-- GEN_FOOTER -->
+</div>
+<script src="/js/common.js.js?27e0f5a094d54655dc93"></script><script src="/js/ReleaseGoods.js?27e0f5a094d54655dc93"></script></body>
+
+
+</html>

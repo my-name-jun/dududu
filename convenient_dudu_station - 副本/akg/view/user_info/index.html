@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>user_info</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"
+            charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
+            charset="utf-8"></script>
+</head>
+<body :controller="vm" class="ms-controller">
+<div class="container" id="container">
+    <!--导航栏-->
+    <div class="div_navigation">
+        <div class="div_navigation_classification fon">
+            分类 <a href="#" class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown"></a>
+            <ul class="dropdown-menu" aria-labelledby="drop2">
+                <li :for='(index,item) in @classification_list'
+                    :attr="value:item.key"><a href="#">{{@item.value}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--已经登陆的下拉框    （新加）-->
+        <div class="select_informations">
+            <div class="select_content" id="1">聊天信息</div>
+            <div class="select_content" id="2">我的订单</div>
+            <div class="select_content" id="3">购物车</div>
+            <div class="select_content" id="4">我的关注</div>
+            <div class="select_content" id="5">我的信息</div>
+            <div class="select_content" id="6">退出</div>
+        </div>
+
+        <div style="width: 66px;height: 28px;display: none;position: absolute;left: 59%;top: 2px;z-index: 50"
+             class="hidden_div"></div>
+
+
+        <div class="div_navigation_home_page">
+            <div class="home"><a href="index.html">首页</a></div>
+            <div class="home1"><a href="commodity_list.html">商品列表</a></div>
+            <div class="home2"><a href="ReleaseGoods.html">发布闲置</a></div>
+            <div class=" user"><a href="#" class="glyphicon glyphicon-user"></a><a href="#" data-toggle="modal"
+                                                                                   data-target="#myModal2">{{@user}}</a>
+            </div>
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="test">
+                                &times;
+                            </button>
+                            <h1 class="modal-title text-center" id="myModalLabel">
+                                登录
+                            </h1>
+                        </div>
+
+
+                        <!--重构登陆-->
+                        <div class="login_main">
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-user"></i></div>
+                                <div class="input_texts"><input class="" type="text" placeholder="请输入账号" id="username"
+                                                                name="username" autofocus="autofocus"
+                                                                autocomplete="off"/></div>
+                            </div>
+                            <div class="login_input">
+                                <div class="input_icon"><i class="glyphicon glyphicon-lock"></i></div>
+                                <div class="input_texts">
+                                    <input class="input_texts" type="password" placeholder="请输入密码" id="password"
+                                           name="password" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="login_footer">
+                                <button type="button" class="btn login_submit" id="land">登录</button>
+                                <div class="updata_password">
+                                    <i class="glyphicon glyphicon-question-sign"></i>
+                                    <span>修改密码</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
+
+    <!--个人页面导航栏-->
+    <div class="my_order">
+        <div class="triangle" id="triangle"></div>
+        <div class="self"><a href="#">个人页面</a></div>
+        <div class="my_information"><a href="Essential_information.html" id="inf">基本信息</a></div>
+        <div class="my_orders"><a href="my_order.html" id="order">我的订单</a></div>
+        <div class="my_follow"><a href="my_follow.html" id="follow">我的关注</a></div>
+        <div class="search_commodity">
+            <div class="relative_position">
+                <input type="text" class="search_commodity_text" placeholder="此处输入搜索商品" id="form_control">
+                <button type="button" class="search_commodity_btn" :click="serach_click">搜索</button>
+                <span class="img_search">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!--modal-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div class="left_info_header_img" id="user_img">
+                        <img class="friend_avatar" :attr="{src:@goods_img}"/>
+                    </div>
+                    <div class="modal_name">昵称</div>
+                </div>
+                <div class="container-wrapper">
+                    <div class="modal-body">
+                        <!--<div class="friend">-->
+                            <!--<div class="friend_img"><img class="friend_avatar" :attr=""></div>-->
+                            <!--<div class="content">一条消息5678910874564dgashdgasjhdajsgdjh</div>-->
+                        <!--</div>-->
+                        <!--<div class="me">-->
+                            <!--<div class="content">一条消息5678910874564dgashdgasjhdajsgdjh</div>-->
+                            <!--<div class="friend_img"><img class="my_avatar" :attr=""></div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <textarea rows="20" class="input_text"></textarea>
+                    <button type="button" class="btn btn-primary footer_font" id="send_btn">发送</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    <div class="main">
+        <!--头像、个人信息栏-->
+        <div class="left_container">
+            <div class="left_info">
+                <div class="left_info_header">
+                    <!--<div class="glyphicon glyphicon-user left_info_header_img"></div>-->
+                    <img id="user_avatar" :attr="{src:@goods_img}" class="left_info_header_img" />
+                    <div id="user_name" class=left_info_header_name>用户昵称</div>
+                </div>
+                <div class="left_info_footer">
+                    <a class="left_info_footer_box" href="my_order.html">我想买的商品</a>
+                    <div class="box_despare"></div>
+                    <a class="left_info_footer_box" href="my_order.html">我想卖的商品</a>
+                    <div class="box_despare"></div>
+                    <a class="left_info_footer_box" href="my_follow.html">我喜欢的商品</a>
+                    <div class="box_despare"></div>
+                    <a class="left_info_footer_box" href="my_order.html#">待评价</a>
+                    <div class="box_despare"></div>
+                    <a class="left_info_footer_box" href="Essential_information.html">我的资料</a>
+                </div>
+            </div>
+        </div>
+
+        <!--历史浏览记录-->
+        <div class="history">
+            <div class="history_header">历史浏览记录</div>
+            <div class="history_container">
+                <div class="history_goods" :click="@jumpToDetail(@item.id)" :for='(index,item) in @history_list'>
+                    <img :attr="{src:@item.img_str}" class="history_goods_img"/>
+                    <div class="history_goods_detail">
+                        <div class="price">￥{{@item.price}}</div>
+                        <div class="goods_name">{{@item.title}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--聊天列表-->
+        <div class="chat">
+            <div class="chat_header">聊天列表</div>
+            <div class="chat_list">
+                <div class="chat_line" :click="@openChat(@item.targetUserId,@item.userAvatar,@item.userName)"  :for='(index,item) in @chat_list'>
+                    <img class="chat_line_img" :attr="{src:@urlhttp+@item.userAvatar}"/>
+                    <div class="chat_line_name">{{@item.userName}}</div>
+                    <div class="chat_line_tips">{{@item.unreadNum}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--FOOTER-->
+    <div class="tail">
+        <div class="div_logo_img">
+            <img :attr="{src:@img_logo}" class="img_logo">
+        </div>
+        <div class="tail_title_font_size">
+            <p><b>便民嘟嘟站，全心全意为大学生服务</b></p>
+            <p>©️2018-2018 华南理工大学广州学院计算机工程学院2016级软件一班便民嘟嘟站 版权所有</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

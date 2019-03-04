@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>商品列表</title>
+<link href="/css/commodity_list.css?27e0f5a094d54655dc93" rel="stylesheet"></head>
+
+<body :controller="vm" class="ms-controller">
+    <div class="container_all">
+        <!-- GEN_HEADER -->
+        <!--导航条-->
+        <div class="div_navigation">
+            <div class="div_navigation_classification fon">
+                分类 <a href="#" class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown"></a>
+                <ul class="dropdown-menu" aria-labelledby="drop2">
+                    <li :for='(index,item) in @classification_list'
+                        :attr="value:item.key" ><a href="#">{{@item.value}}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--已经登陆的下拉框    （新加）-->
+            <div class="select_informations">
+                <div class="select_content" id="1">聊天信息</div>
+                <div class="select_content" id="2">我的订单</div>
+                <div class="select_content" id="3">购物车</div>
+                <div class="select_content" id="4">我的关注</div>
+                <div class="select_content" id="5">我的信息</div>
+                <div class="select_content" id="6">退出</div>
+            </div>
+
+            <div style="width: 66px;height: 28px;display: none;position: absolute;left: 1000px;top: 2px;z-index: 50" class="hidden_div"></div>
+
+
+            <div class="div_navigation_home_page">
+                <div class="home"><a href="#">首页</a></div>
+                <div class="home1"><a href="#" >商品列表</a></div>
+                <div class="home2"><a href="#" :click="@ldie">发布闲置</a></div>
+                <div class=" user"><a href="#" class="glyphicon glyphicon-user"></a><a href="#" data-toggle="modal"
+                                                                                       data-target="#myModal">{{@user}}</a></div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="test">
+                                    &times;
+                                </button>
+                                <h1 class="modal-title text-center" id="myModalLabel">
+                                    登录
+                                </h1>
+                            </div>
+
+
+                            <!--重构登陆-->
+                            <div class="login_main">
+                                <div class="login_input">
+                                    <div class="input_icon"><i class="glyphicon glyphicon-user"></i></div>
+                                    <div class="input_texts"><input class="" type="text" placeholder="请输入账号" id="username"
+                                                                    name="username" autofocus="autofocus" autocomplete="off"/></div>
+                                </div>
+                                <div class="login_input">
+                                    <div class="input_icon"><i class="glyphicon glyphicon-lock"></i></div>
+                                    <div class="input_texts">
+                                        <input type="password" placeholder="请输入密码" id="password"
+                                               name="password" autocomplete="off"/>
+                                    </div>
+                                </div>
+                                <div class="login_footer">
+                                    <button type="button" class="btn login_submit" id="land">登录</button>
+                                    <div class="updata_password">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                        <span>修改密码</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 内容 -->
+        <div class="div_content">
+            <!--logo及搜索-->
+            <div class="div_logo">
+                <img :attr="{src:@img_logo}" class="img_logo">
+                <div class="input-group search_text">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                    <input type="text" class="form-control" placeholder="此处输入搜索商品" id="form_control">
+                </div>
+                <div class="search bs-example">
+                    <button type="button" class="btn btn-primary " :click="serach_click">搜索</button>
+                </div>
+            </div>
+        </div>
+        <!-- GEN_COMPONENT -->
+        <div class="sors_title" id="sors_title">{{@single_title}}
+            <span id="sort_close" class="sors_title_span">&times;</span>
+        </div>
+        <div class="header_title">
+            <div class="title_first">
+                <span class="main_title">分类</span>
+                <span class="content_title" onclick="" :click="@sortF(index,item.id)" :for="(index,item) in @sorts">{{@item.value}}</span>
+                <!--<span class="content_title" id="Electronics">电子产品</span>-->
+                <!--<span class="content_title" id="Cosmetics">美妆/个人护肤</span>-->
+                <!--<span class="content_title" id="clothes">服装</span>-->
+                <!--<span class="content_title" id="skill">个人技能</span>-->
+            </div>
+            <div class="title_second">
+                <span class="main_title">价格范围</span>
+                <input type="text" class="title_second_input" placeholder="最高价">
+                <span class="title_second_span">-</span>
+                <input type="text" class="title_second_input" style="margin-left: 0" placeholder="最低价">
+                <span class="title_second_span">元</span>
+                <button class="btn" style="background-color: #f82800;color: white">确定</button>
+            </div>
+        </div>
+
+        <div class="sort_title">
+            <div class="sort_content">综合排序</div>
+            <div class="sort_content">价格排序</div>
+            <div class="sort_content">收藏排序</div>
+            <div class="sort_content">时间排序</div>
+        </div>
+
+        <!--content-->
+        <div class="commodity_content" id="commodity_all">
+            <div class="single_commodity" :click="@hot_commodity(@item.id)" :for='(index,item) in @commodity_all'>
+                <div class="commodity_img">
+                    <img :attr="{src:@srcurl + @item.icon}" alt="" style="width: 100%;height: 100%">
+                    <!--<span class="collection">-->
+                        <!--<a id="collect1"-->
+                           <!--class="glyphicon glyphicon-heart" style="color: gray"-->
+                           <!--:click="@collect_interval"></a>-->
+                    <!--</span>-->
+
+                </div>
+                <div class="commodity_detail">
+                    <div class="price">￥{{@item.price}}</div>
+                    <span class="name">{{@item.name}}</span>
+                </div>
+                <div class="business_information">
+                    <span class="icon">
+                        <img :attr="{src:@srcurl + @item.user[0].avatar}" alt="" style="width: 100%;height: 100%" alt="">
+                    </span>
+                    <span class="user_name">{{@item.user[0].name}}</span>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <!-- GEN_FOOTER -->
+        <div class="tail">
+            <div class="div_logo_img">
+                <img :attr="{src:@img_logo}" class="img_logo">
+            </div>
+            <div class="tail_title_font_size">
+                <p><b>便民嘟嘟站，全心全意为大学生服务</b></p>
+                <p>©️2018-2018 华南理工大学广州学院计算机工程学院2016级软件一班便民嘟嘟站 版权所有</p>
+            </div>
+        </div>
+    </div>
+<script src="/js/common.js.js?27e0f5a094d54655dc93"></script><script src="/js/commodity_list.js?27e0f5a094d54655dc93"></script></body>
+
+</html>
